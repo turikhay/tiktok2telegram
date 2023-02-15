@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: .
+    environment:
+      STORAGE_FILE: /data/storage.json
+    tmpfs: /tmp
+    volumes:
+      - storage-data:/data
+    restart: always
+volumes:
+  storage-data: {}

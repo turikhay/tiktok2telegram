@@ -1,0 +1,8 @@
+services:
+  server:
+    environment:
+      TELEGRAM_BOT_TOKEN: 123456:qwerty
+      TELEGRAM_OWNER_ID: 123456
+      TELEGRAM_CHANNEL_ID: -100123456
+      TIKTOK_SEC_UID: SeCUiDLong123456qwerty
+      RAPIDAPI_KEY: YoUrRaPiDApIKeY123456qwerty
