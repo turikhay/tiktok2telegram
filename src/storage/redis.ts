@@ -10,6 +10,9 @@ export default class RedisStorage implements Storage {
 
   async getNonPostedVideoIds(set: Iterable<VideoId>): Promise<VideoId[]> {
     const args = Array.from(set);
+    if (args.length == 0) {
+      return args;
+    }
     const map = new Map(args.map((v, i) => [i, v]));
     const result = await this.client.smIsMember(this.key, args);
     result.forEach((v, i) => {
