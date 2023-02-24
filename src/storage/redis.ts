@@ -32,6 +32,5 @@ export async function createRedisStorage(
   const client = createClient({ url });
   client.on("error", (e) => logger.error("Redis error", e));
   await client.connect();
-  client;
   return new RedisStorage(client, key);
 }
