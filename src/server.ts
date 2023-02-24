@@ -47,16 +47,20 @@ export class Server {
   private async doTick(): Promise<void> {
     logger.info("Querying liked videos...");
     const videoMap = await this.tiktok.getLatestLikedVideos();
-    const alreadyPostedVideoIds = await this.storage.getLatestPostedVideos();
-    const newVideos = new Map(videoMap);
-    alreadyPostedVideoIds.forEach((id) => newVideos.delete(id));
-    if (newVideos.size == 0) {
+    const newVideoIds = await this.storage.getNonPostedVideoIds(
+      videoMap.keys()
+    );
+    const newVideos = newVideoIds
+      .map((id) => videoMap.get(id))
+      .filter((video) => !!video) as Video[];
+    if (newVideos.length == 0) {
       logger.info(`No new videos found`);
       return;
     }
-    logger.info(`Found new videos`, newVideos.values());
-    const videosAwait: Promise<void>[] = [];
-    newVideos.forEach((video) => videosAwait.push(this.processVideo(video)));
+    logger.info(`Found new videos`, newVideos);
+    const videosAwait: Promise<void>[] = newVideos.map((video) =>
+      this.processVideo(video)
+    );
     await Promise.all(videosAwait);
     logger.info(`Uploads finished`);
   }
@@ -93,7 +97,7 @@ export class Server {
       this.recycle(artifact);
     }
     try {
-      await this.storage.addLatestPostedVideo(video.id);
+      await this.storage.addToPostedVideoIds(video.id);
     } catch (e) {
       logger.error(`Couldn't save to posted videos ${video.id}`, e);
       this.telegram.sendMessage(

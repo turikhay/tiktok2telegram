@@ -1,6 +1,6 @@
 import { VideoId } from "../types";
 
 export interface Storage {
-  getLatestPostedVideos(): Promise<Set<VideoId>>;
-  addLatestPostedVideo(id: VideoId): Promise<void>;
+  getNonPostedVideoIds(set: Iterable<VideoId>): Promise<VideoId[]>;
+  addToPostedVideoIds(id: VideoId): Promise<void>;
 }

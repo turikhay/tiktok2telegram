@@ -7,15 +7,18 @@ import { FilePath, VideoId } from "../types";
 export class FileStorage implements Storage {
   constructor(private path: FilePath = process.env.STORAGE_FILE) {}
 
-  async getLatestPostedVideos(): Promise<Set<VideoId>> {
+  async getNonPostedVideoIds(set: Iterable<VideoId>): Promise<VideoId[]> {
+    const diff = new Set<VideoId>(set);
     const contents = await readFileContents(this.path);
-    return new Set(contents.videos);
+    contents.videos.forEach((alreadyPosted) => diff.delete(alreadyPosted));
+    return Array.from(diff);
   }
 
-  async addLatestPostedVideo(id: VideoId): Promise<void> {
-    const videos = (await this.getLatestPostedVideos()).add(id);
+  async addToPostedVideoIds(id: VideoId): Promise<void> {
+    const set = new Set((await readFileContents(this.path)).videos);
+    set.add(id);
     await writeFileContents(this.path, {
-      videos: Array.from(videos),
+      videos: Array.from(set),
     });
   }
 }
