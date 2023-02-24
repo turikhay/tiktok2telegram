@@ -12,5 +12,8 @@ declare namespace NodeJS {
 
     STORAGE_FILE: string;
     EXCLUDED_HASHTAGS_FILE: string;
+
+    REDIS_URL: string;
+    REDIS_SET_KEY: string;
   }
 }

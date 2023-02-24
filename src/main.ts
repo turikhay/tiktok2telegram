@@ -3,10 +3,18 @@ import { logger } from "./logging";
 dotenv.config();
 
 import { Server } from "./server";
+import { FileStorage } from "./storage/file";
+import { createRedisStorage } from "./storage/redis";
 
-const server = new Server();
-server.start();
+(async () => {
+  const storage = process.env.REDIS_URL
+    ? await createRedisStorage()
+    : new FileStorage();
 
-process.on("exit", () => server.stop());
+  const server = new Server(storage);
+  server.start();
 
-logger.info("Server started");
+  process.on("exit", () => server.stop());
+
+  logger.info("Server started");
+})();

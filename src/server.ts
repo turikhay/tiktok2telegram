@@ -8,7 +8,6 @@ import { IReencoder, NoopEncoder } from "./reencoder";
 import { Scheduler } from "./scheduler";
 import { SetTimeoutScheduler } from "./scheduler/setTimeout";
 import { Storage } from "./storage";
-import { FileStorage } from "./storage/file";
 import { ITelegramApi } from "./telegram";
 import { TelegramApi } from "./telegram/impl";
 import { ITikTokApi } from "./tiktok/api";
@@ -17,9 +16,9 @@ import { Artifact, Video } from "./types";
 
 export class Server {
   constructor(
+    private storage: Storage,
     private tiktok: ITikTokApi = new ZetreexTikTokApi(),
     private telegram: ITelegramApi = new TelegramApi(),
-    private storage: Storage = new FileStorage(),
     private hash: HashProcessor = new HashProcessor(),
     private downloader: IDownloader = new AxiosDownloader(),
     private reencoder: IReencoder = NoopEncoder,
