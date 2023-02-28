@@ -12,9 +12,11 @@ import { ITelegramApi } from "./telegram";
 import { TelegramApi } from "./telegram/impl";
 import { ITikTokApi } from "./tiktok/api";
 import { ZetreexTikTokApi } from "./tiktok/zetreex";
-import { Artifact, Video } from "./types";
+import { Artifact, Video, VideoMap } from "./types";
 
 export class Server {
+  private lastBadRequests = 0;
+
   constructor(
     private storage: Storage,
     private tiktok: ITikTokApi = new ZetreexTikTokApi(),
@@ -45,7 +47,22 @@ export class Server {
 
   private async doTick(): Promise<void> {
     logger.info("Querying liked videos...");
-    const videoMap = await this.tiktok.getLatestLikedVideos();
+    let videoMap: VideoMap;
+    try {
+      videoMap = await this.tiktok.getLatestLikedVideos();
+    } catch (e) {
+      logger.error("TikTok service error", e);
+      this.lastBadRequests++;
+      if (this.lastBadRequests == 2) {
+        this.telegram.sendMessage("Сервис TikTok недоступен");
+      }
+      return;
+    }
+    if (this.lastBadRequests > 2) {
+      logger.info("TikTok is now available");
+      this.telegram.sendMessage("Сервис TikTok восстановлен");
+      this.lastBadRequests = 0;
+    }
     const newVideoIds = await this.storage.getNonPostedVideoIds(
       videoMap.keys()
     );
