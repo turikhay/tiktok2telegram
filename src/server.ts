@@ -61,8 +61,8 @@ export class Server {
     if (this.lastBadRequests > 2) {
       logger.info("TikTok is now available");
       this.telegram.sendMessage("Сервис TikTok восстановлен");
-      this.lastBadRequests = 0;
     }
+    this.lastBadRequests = 0;
     const newVideoIds = await this.storage.getNonPostedVideoIds(
       videoMap.keys()
     );
