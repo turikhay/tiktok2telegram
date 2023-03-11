@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "test": "jest --verbose",
-    "start": "node build/main.js"
+    "start": "node build/main.js",
+    "dry": "TIKTOK_SERVER_DRY_RUN=true node build/main.js"
   },
   "keywords": [],
   "author": "turikhay",

@@ -25,7 +25,8 @@ export class Server {
     private downloader: IDownloader = new AxiosDownloader(),
     private reencoder: IReencoder = NoopEncoder,
     private scheduler: Scheduler = new SetTimeoutScheduler(),
-    private recycler: IRecycler = ImmediateRecycler
+    private recycler: IRecycler = ImmediateRecycler,
+    private dry: boolean = process.env.TIKTOK_SERVER_DRY_RUN === "true"
   ) {}
 
   start(): void {
@@ -79,6 +80,9 @@ export class Server {
     );
     await Promise.all(videosAwait);
     logger.info(`Uploads finished`);
+    if (this.dry) {
+      logger.warn("Dry-run enabled. Video were not actually uploaded");
+    }
   }
 
   private async processVideo(video: Video): Promise<void> {
@@ -102,6 +106,9 @@ export class Server {
       if (ogArtifact !== artifact) {
         this.recycle(ogArtifact);
       }
+    }
+    if (this.dry) {
+      return;
     }
     try {
       await this.uploadVideo(video, artifact);

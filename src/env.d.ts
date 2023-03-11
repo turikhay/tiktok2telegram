@@ -15,5 +15,7 @@ declare namespace NodeJS {
 
     REDIS_URL: string;
     REDIS_SET_KEY: string;
+
+    TIKTOK_SERVER_DRY_RUN: string;
   }
 }
