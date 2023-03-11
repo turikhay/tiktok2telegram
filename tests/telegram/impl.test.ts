@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-import { TelegramApi } from "../../src/telegram/impl";
+import { processTags, TelegramApi } from "../../src/telegram/impl";
 
 test.skip("sendMessage", async () => {
   const api = new TelegramApi();
@@ -17,3 +17,10 @@ test.skip("sendMessage", async () => {
     tags: new Set(["#foo", "#bar"]),
   });
 }, 60000);
+
+test("processTags", async () => {
+  expect(processTags(["#foo", "#bar"])).toEqual("\\#foo \\#bar");
+  expect(processTags(["#всем_привет", "#как_дела"])).toEqual(
+    "\\#всем\\_привет \\#как\\_дела"
+  );
+});

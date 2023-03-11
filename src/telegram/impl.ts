@@ -2,6 +2,7 @@ import { ITelegramApi, VideoUpload } from ".";
 import TelegramBot from "node-telegram-bot-api";
 import { Semaphore } from "semaphore-promise";
 import { logger } from "../logging";
+import { HashTag } from "../hash/parser";
 
 export type Chats = {
   author: string;
@@ -43,9 +44,7 @@ export class TelegramApi implements ITelegramApi {
         this.chats.targetChannel,
         path,
         {
-          caption: `[TikTok](${video.url}) ${Array.from(tags)
-            .map((tag) => `\\${tag}`)
-            .join(" ")}`.trim(),
+          caption: processCaption(video.url, tags),
           parse_mode: "MarkdownV2",
         },
         {
@@ -57,4 +56,15 @@ export class TelegramApi implements ITelegramApi {
       release();
     }
   }
+}
+
+function processCaption(url: string, tags: Set<HashTag>): string {
+  return `[TikTok](${url}) ${processTags(Array.from(tags))}`.trim();
+}
+
+export function processTags(tags: HashTag[]): string {
+  return tags
+    .map((tag) => tag.replace(/(_)/g, "\\$1"))
+    .map((tag) => `\\${tag}`)
+    .join(" ");
 }
