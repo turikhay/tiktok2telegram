@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { logger } from "../logging";
 
 import { Url, VideoMap } from "../types";
 import { ITikTokApi } from "./api";
@@ -32,14 +33,22 @@ export class ZetreexTikTokApi implements ITikTokApi {
       }
     );
     const map: VideoMap = new Map();
-    data.posts.forEach((post) =>
-      map.set(post.aweme_id, {
-        id: post.aweme_id,
-        sourceUrl: post.play_links[0],
-        url: post.web_link,
-        description: post.description,
+    data.posts
+      .filter((post) => {
+        const isMp3 = post.play_links[0].endsWith(".mp3");
+        if (isMp3) {
+          logger.info(`Filtering audio-only TikTok: ${post.web_link}`);
+        }
+        return !isMp3;
       })
-    );
+      .forEach((post) =>
+        map.set(post.aweme_id, {
+          id: post.aweme_id,
+          sourceUrl: post.play_links[0],
+          url: post.web_link,
+          description: post.description,
+        })
+      );
     return map;
   }
 }
