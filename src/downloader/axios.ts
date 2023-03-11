@@ -17,7 +17,7 @@ export class AxiosDownloader implements IDownloader {
     const { data: stream, headers } = await axios.get<Stream>(url, {
       responseType: "stream",
       onDownloadProgress(progressEvent) {
-        logger.info(
+        logger.debug(
           `Downloading ${url}: ${(progressEvent.progress ?? Number.NaN) * 100}%`
         );
       },

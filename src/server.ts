@@ -124,8 +124,10 @@ export class Server {
   }
 
   private async downloadVideo({ id, sourceUrl }: Video): Promise<Artifact> {
-    logger.info(`Downloading ${id}: ${sourceUrl}`);
-    return await this.downloader.download(sourceUrl);
+    logger.info(`Downloading ${id}`);
+    const artifact = await this.downloader.download(sourceUrl);
+    logger.info(`Download finished ${id}`);
+    return artifact;
   }
 
   private async extractHashTags({
