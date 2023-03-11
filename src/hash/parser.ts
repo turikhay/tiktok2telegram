@@ -10,7 +10,7 @@ export interface HashTagParser {
 
 export const DefaultHashTagParser: HashTagParser = Object.freeze({
   parse(str: string) {
-    const regex = /(#[a-zа-я_\d]+)/gim;
+    const regex = /(#[\u0030-\uFFFF]+)/gm;
     const matches: HashTag[] = [];
 
     let match: ReturnType<typeof regex.exec>;

@@ -25,4 +25,9 @@ test("default hash parser", () => {
   expect(p("#real#lol#2020")).toEqual(["#real", "#lol", "#2020"]);
   expect(p("#рек")).toEqual(["#рек"]);
   expect(p("#foo_bar")).toEqual(["#foo_bar"]);
+  expect(p("#кіт_українець#Україна")).toEqual(["#кіт_українець", "#Україна"]);
+  expect(p("#indiantiktok🇮🇳🇮🇳 #learninghindi")).toEqual([
+    "#indiantiktok🇮🇳🇮🇳",
+    "#learninghindi",
+  ]);
 });
