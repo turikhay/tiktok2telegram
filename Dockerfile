@@ -14,4 +14,8 @@ COPY .env.sample ./.env
 
 RUN pnpm build
 
+ENV NODE_ENV production
+
+USER node
+
 CMD [ "pnpm", "start" ]
