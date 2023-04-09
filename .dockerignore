@@ -1,4 +1,6 @@
 .env
+.env.local
+docker-compose.override.yml
 node_modules/
 build/
 /storage.json
