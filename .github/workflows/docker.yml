@@ -6,6 +6,8 @@ on:
       - main
 
 jobs:
+  test:
+    uses: ./.github/workflows/test.yml
   docker:
     runs-on: ubuntu-latest
     steps:
