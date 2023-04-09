@@ -20,4 +20,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: turikhay/tiktok2telegram:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/tiktok2telegram:${{ github.sha }},${{ secrets.DOCKER_HUB_USERNAME }}/tiktok2telegram:latest
