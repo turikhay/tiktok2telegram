@@ -4,3 +4,6 @@ docker-compose.override.yml
 node_modules/
 build/
 /storage.json
+/.vscode
+/.github
+/.git
