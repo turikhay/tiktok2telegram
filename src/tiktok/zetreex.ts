@@ -43,6 +43,7 @@ export class ZetreexTikTokApi implements ITikTokApi {
       })
       .forEach((post) =>
         map.set(post.aweme_id, {
+          __og: post,
           id: post.aweme_id,
           sourceUrl: post.play_links[0],
           url: post.web_link,

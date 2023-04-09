@@ -4,6 +4,7 @@ export type ContentType = string;
 
 export type VideoId = string;
 export type Video = {
+  __og: unknown;
   id: VideoId;
   sourceUrl: Url;
   url: Url;
