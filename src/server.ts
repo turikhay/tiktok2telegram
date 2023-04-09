@@ -74,7 +74,9 @@ export class Server {
       logger.info(`No new videos found`);
       return;
     }
-    logger.info(`Found new videos`, newVideos);
+    logger.info(
+      `Found new videos:\n${JSON.stringify(newVideos, undefined, 2)}`
+    );
     const videosAwait: Promise<void>[] = newVideos.map((video) =>
       this.processVideo(video)
     );
