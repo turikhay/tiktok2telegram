@@ -2,20 +2,18 @@ FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
-RUN npm i -g pnpm
+COPY package.json package-lock.json* ./
 
-COPY package.json pnpm-lock.yaml ./
-
-RUN pnpm install --frozen-lockfile
+RUN npm install
 
 COPY . .
 
 COPY .env.sample ./.env
 
-RUN pnpm build
+RUN npm run build
 
 ENV NODE_ENV production
 
 USER node
 
-CMD [ "pnpm", "start" ]
+CMD npm run start
