@@ -8,6 +8,7 @@ test.skip("sendMessage", async () => {
   await api.sendVideo({
     path: "/home/turikhay/Y_9fidLK_r_21.mp4",
     video: {
+      __og: "test download",
       sourceUrl: "https://foo/download",
       url: "https://foo",
       id: "Y_9fidLK_r_21",
