@@ -21,7 +21,7 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
-    "@tsconfig/node18": "^1.0.1",
+    "@tsconfig/node18": "^2.0.0",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
     "@types/node-telegram-bot-api": "^0.61.6",
