@@ -18,7 +18,7 @@
     "node-telegram-bot-api": "^0.61.0",
     "redis": "^4.6.6",
     "semaphore-promise": "^1.4.1",
-    "winston": "^3.8.2"
+    "winston": "^3.9.0"
   },
   "devDependencies": {
     "@tsconfig/node18": "^2.0.0",
