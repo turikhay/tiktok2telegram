@@ -1,4 +1,4 @@
-import { DefaultHashTagParser, HashTag } from "../../src/hash/parser";
+import { DefaultHashTagParser } from "../../src/hash/parser";
 
 test("default hash parser", () => {
   const p = DefaultHashTagParser.parse.bind(DefaultHashTagParser);
