@@ -16,3 +16,6 @@ updates:
       actions:
         patterns:
           - "actions/*"
+      docker:
+        patterns:
+          - "docker/*"
