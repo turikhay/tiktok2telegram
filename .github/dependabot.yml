@@ -8,3 +8,11 @@ updates:
       typescript-eslint:
         patterns:
           - "@typescript-eslint"
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns:
+          - "actions/*"
