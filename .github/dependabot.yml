@@ -4,3 +4,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "monthly"
+    groups:
+      typescript-eslint:
+        patterns:
+          - "@typescript-eslint"
