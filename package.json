@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@tsconfig/node18": "^2.0.0",
-    "@types/jest": "^29.5.10",
+    "@types/jest": "^29.5.12",
     "@types/node": "^18.16.3",
     "@types/node-telegram-bot-api": "^0.64.3",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
