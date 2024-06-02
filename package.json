@@ -15,7 +15,7 @@
   "dependencies": {
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
-    "node-telegram-bot-api": "^0.65.1",
+    "node-telegram-bot-api": "^0.66.0",
     "redis": "^4.6.13",
     "semaphore-promise": "^1.4.2",
     "winston": "^3.13.0"
