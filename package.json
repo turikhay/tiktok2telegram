@@ -13,7 +13,7 @@
   "author": "turikhay",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.8.1",
+    "axios": "^1.8.4",
     "dotenv": "^16.4.7",
     "node-telegram-bot-api": "^0.66.0",
     "redis": "^4.7.0",
