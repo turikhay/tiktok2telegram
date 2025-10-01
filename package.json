@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^1.12.0",
-    "dotenv": "^17.2.1",
+    "dotenv": "^17.2.3",
     "node-telegram-bot-api": "^0.66.0",
     "redis": "^5.8.2",
     "semaphore-promise": "^1.4.3",
