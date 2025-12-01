@@ -27,7 +27,7 @@
     "@types/node-telegram-bot-api": "^0.64.11",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.31.1",
-    "eslint": "^9.34.0",
+    "eslint": "^9.39.1",
     "jest": "^30.2.0",
     "ts-jest": "^29.4.1",
     "typescript": "^5.9.3"
