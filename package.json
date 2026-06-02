@@ -16,7 +16,7 @@
     "axios": "^1.16.0",
     "dotenv": "^17.4.2",
     "node-telegram-bot-api": "^0.67.0",
-    "redis": "^5.8.2",
+    "redis": "^6.0.0",
     "semaphore-promise": "^1.4.3",
     "winston": "^3.19.0"
   },
